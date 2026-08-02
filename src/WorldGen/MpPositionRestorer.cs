@@ -26,12 +26,12 @@ namespace CasualtiesUnknown.SaveManager
             {
                 var harmony = new Harmony("com.casualtiesUnknown.saveManager.mpPosition");
                 var finish = AccessTools.Method(typeof(WorldGeneration), "FinishWorldGeneration");
+
                 if (finish != null)
                 {
                     harmony.Patch(finish, postfix: new HarmonyMethod(typeof(MpPositionFinishPatch), nameof(MpPositionFinishPatch.Postfix)));
                 }
                 MpLateSpawnSuppressor.TryPatch();
-                MpPlaceBodySilencer.TryPatch(harmony);
                 _harmonyPatched = true;
                 ModLog.Info("多人回档位置写回已挂载（FinishWorldGeneration Postfix）");
             }
@@ -43,7 +43,6 @@ namespace CasualtiesUnknown.SaveManager
 
         internal static void PrepareForRollback(SlotSidecar sidecar)
         {
-            TryPatchHarmony();
             var positions = ReadPlrPosFromMpRules();
             if (positions.Count == 0)
                 ModLog.Warning("多人回档：mp_rules 无 PLRPOS，仅尝试 sidecar 主机坐标");
@@ -220,28 +219,5 @@ namespace CasualtiesUnknown.SaveManager
             try { MpPositionRestorer.ApplyAfterFinishWorldGen(); }
             catch (Exception ex) { ModLog.Warning($"MpPositionFinishPatch 异常：{ex.Message}"); }
         }
-    }
-
-    /// <summary>回档读档时静音 Krok PlaceBody Postfix，避免把全员拉到层顶出生点。</summary>
-    internal static class MpPlaceBodySilencer
-    {
-        private static bool _patched;
-
-        internal static void TryPatch(Harmony harmony)
-        {
-            if (_patched) return;
-            var asm = MultiplayerBridge.GetKrokAssembly();
-            if (asm == null) return;
-            var t = asm.GetType("KrokoshaCasualtiesMP.Body_PlaceBody_MultiplayerPatch");
-            if (t == null) return;
-            var postfix = AccessTools.Method(t, "Postfix");
-            if (postfix == null) return;
-            harmony.Patch(postfix, prefix: new HarmonyMethod(typeof(MpPlaceBodySilencer), nameof(BlockDuringRollback)));
-            _patched = true;
-            ModLog.Info("多人 PlaceBody 广播抑制已挂载");
-        }
-
-        private static bool BlockDuringRollback()
-            => !(MpPositionRestorer.ActiveSession && SaveSystem.loadedRun);
     }
 }
