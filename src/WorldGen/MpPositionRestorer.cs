@@ -83,6 +83,9 @@ namespace CasualtiesUnknown.SaveManager
                 ModLog.Info($"  PLRPOS {kv.Key} = ({kv.Value.x:0.0},{kv.Value.y:0.0})");
         }
 
+        /// <summary>
+        /// 挂载到 FinishWorldGeneration Postfix 中调用，尝试写回玩家位置.
+        /// </summary>
         internal static void ApplyAfterFinishWorldGen()
         {
             if (!_activeSession || _pending == null || _pending.Count == 0) return;
