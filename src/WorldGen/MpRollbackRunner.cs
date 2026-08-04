@@ -1,3 +1,4 @@
+using KrokoshaCasualtiesUtils;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -30,11 +31,7 @@ namespace CasualtiesUnknown.SaveManager
 
         private static IEnumerator ApplyRetries(Action apply, Action onComplete)
         {
-            yield return null;
-            apply();
-            yield return null;
-            apply();
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitUntil(Util.IsWorldGenerated);
             apply();
             onComplete?.Invoke();
         }
