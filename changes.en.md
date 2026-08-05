@@ -2,11 +2,7 @@
 
 > 中文更新日志：见 [changes.md](changes.md)
 
-## 1.2.0
-
-Fixed anti-rad drugs (and other trap-named items) carried in the inventory always disappearing when entering the next layer.
-
-Fixed items in oversized custom containers (e.g. Super Galaxy Belt / Material Pouch) being lost or scattered on the ground after loading a save.
+## 1.2.1
 
 Dedicated Server compatible: host coordinates from the sidecar are skipped on rollback (a dedicated server has no local player).
 
@@ -14,7 +10,13 @@ Fixed multiplayer rollback position-packet timing: now waits for world generatio
 
 Removed the redundant PlaceBody broadcast silencer (KrokMP now guards with `has_spawn_location` itself).
 
-Build: target framework net472 → net48; added a direct `KrokoshaCasualtiesMP.dll` reference (rollback coroutine switched from reflection to a strong reference).
+Build: target framework net472 → net48; added a direct `KrokoshaCasualtiesMP.dll` reference (rollback coroutine switched from reflection to a strong reference); LangVersion unified to `latest` for compatibility with the .NET 8 SDK used by CI.
+
+## 1.2.0
+
+Fixed anti-rad drugs (and other trap-named items) carried in the inventory always disappearing when entering the next layer.
+
+Fixed items in oversized custom containers (e.g. Super Galaxy Belt / Material Pouch) being lost or scattered on the ground after loading a save.
 
 ## 1.1.8 & 1.1.9
 

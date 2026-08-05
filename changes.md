@@ -2,11 +2,7 @@
 
 > English changelog: see [changes.en.md](changes.en.md)
 
-## 1.2.0
-
-修复抗辐射药等陷阱同名物品每次进下一层必消失的问题。
-
-修复超级银河皮带/材料包等自定义大容量容器读档后内容物丢失或散落一地的问题。
+## 1.2.1
 
 兼容 Dedicated Server：回档时跳过 sidecar 主机坐标写回（专服没有本地玩家）。
 
@@ -14,7 +10,13 @@
 
 移除冗余的 PlaceBody 广播静音（KrokMP 新版已自带 `has_spawn_location` 守卫）。
 
-工程：目标框架 net472 → net48；新增 `KrokoshaCasualtiesMP.dll` 直接引用（位置写回协程由反射改为强引用）。
+工程：目标框架 net472 → net48；新增 `KrokoshaCasualtiesMP.dll` 直接引用（位置写回协程由反射改为强引用）；LangVersion 统一 latest 以兼容 CI 的 .NET 8 SDK。
+
+## 1.2.0
+
+修复抗辐射药等陷阱同名物品每次进下一层必消失的问题。
+
+修复超级银河皮带/材料包等自定义大容量容器读档后内容物丢失或散落一地的问题。
 
 ## 1.1.8 & 1.1.9
 
