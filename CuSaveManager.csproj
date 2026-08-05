@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
     <AssemblyName>CuSaveManager</AssemblyName>
     <RootNamespace>CasualtiesUnknown.SaveManager</RootNamespace>
-    <LangVersion>9</LangVersion>
+    <LangVersion>14</LangVersion>
     <Nullable>disable</Nullable>
     <Version>1.2.0</Version>
     <Description>Casualties Unknown — 多存档槽位管理与定时备份 mod</Description>
@@ -67,6 +67,10 @@
       <HintPath>references\UnityEngine.UnityWebRequestModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
+	<Reference Include="KrokoshaCasualtiesMP">
+		<HintPath>references\KrokoshaCasualtiesMP.dll</HintPath>
+		<Private>false</Private>
+	</Reference>
   </ItemGroup>
 
 </Project>

@@ -183,9 +183,13 @@ namespace CasualtiesUnknown.SaveManager
         private static bool PathsEqual(string a, string b)
             => string.Equals(Path.GetFullPath(a), Path.GetFullPath(b), StringComparison.OrdinalIgnoreCase);
 
-        // —— 改 —— //
-
-        /// <summary>把指定槽位还原到游戏存档。单机覆盖 save.sv；多人解包回 mp_save 并由主机重新发起加载。</summary>
+        /// <summary>
+        /// 回档前准备文件和世界引擎，恢复指定槽位到当前游戏存档。
+        /// </summary>
+        /// <param name="slotFullPath">存档路径</param>
+        /// <param name="backupBefore">是否在回档前备份</param>
+        /// <exception cref="FileNotFoundException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
         internal void RestoreSlotToSave(string slotFullPath, bool backupBefore)
         {
             if (!File.Exists(slotFullPath))

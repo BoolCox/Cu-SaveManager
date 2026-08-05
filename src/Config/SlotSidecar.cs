@@ -43,6 +43,11 @@ namespace CasualtiesUnknown.SaveManager
         /// <summary>本层激活的 LayerModifier 索引；-2=未记录（旧档/游戏未加载，回档时交给游戏自滚），-1=本层无词条，>=0=对应 modifierIndex。读档时由 ApplyLayerModifiersRestorePatch 还原。</summary>
         internal int ActiveLayerModifierIndex { get; set; } = -2;
 
+        /// <summary>
+        /// 从指定路径加载.json元数据；若文件不存在或解析失败，返回空实例。
+        /// </summary>
+        /// <param name="slotPath">上游传入的存档路径</param>
+        /// <returns></returns>
         internal static SlotSidecar LoadOrEmpty(string slotPath)
         {
             try

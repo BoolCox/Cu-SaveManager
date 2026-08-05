@@ -63,10 +63,12 @@ namespace CasualtiesUnknown.SaveManager
             return null;
         }
 
-        /// <summary>用 zip 包覆盖还原 mp_save 目录（先清空再解包）。</summary>
+        /// <summary>
+        /// 回档时调用，用savemanage的.sv（实际是.zip）文件还原KrokMP存档目录 mp_save。若 mp_save 已存在则先删除。
+        /// </summary>
+        /// <param name="srcZipPath">上游传入的备份目录</param>
         internal static void RestoreMpSaveFrom(string srcZipPath)
         {
-            if (!File.Exists(srcZipPath)) throw new FileNotFoundException("槽位文件不存在", srcZipPath);
             if (Directory.Exists(MpSaveDir)) Directory.Delete(MpSaveDir, recursive: true);
             Directory.CreateDirectory(MpSaveDir);
             ZipFile.ExtractToDirectory(srcZipPath, MpSaveDir);
