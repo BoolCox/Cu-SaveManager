@@ -1,6 +1,6 @@
+using BepInEx.Configuration;
 using System;
 using System.Collections.Generic;
-using BepInEx.Configuration;
 using UnityEngine;
 
 namespace CasualtiesUnknown.SaveManager
@@ -438,7 +438,7 @@ namespace CasualtiesUnknown.SaveManager
             GUILayout.Label(I18n.T("about.title"), CenterTitleStyle, GUILayout.ExpandWidth(true));
             GUILayout.Space(6f);
             GUILayout.Label(I18n.T("about.desc"), CenterLabelStyle, GUILayout.ExpandWidth(true));
-            GUILayout.Label(I18n.F("about.version", Plugin.PluginVersion), CenterLabelStyle, GUILayout.ExpandWidth(true));
+            GUILayout.Label(I18n.F("about.version", MyPluginInfo.PLUGIN_VERSION), CenterLabelStyle, GUILayout.ExpandWidth(true));
 
             GUILayout.Space(16f);
             GUILayout.Label(I18n.T("about.sec_links"), CenterTitleStyle, GUILayout.ExpandWidth(true));

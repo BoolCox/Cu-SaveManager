@@ -1,7 +1,6 @@
+using HarmonyLib;
 using System;
 using System.Reflection;
-using HarmonyLib;
-using UnityEngine;
 
 namespace CasualtiesUnknown.SaveManager
 {

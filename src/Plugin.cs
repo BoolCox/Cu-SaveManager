@@ -1,6 +1,6 @@
-using System;
 using BepInEx;
 using BepInEx.Logging;
+using System;
 using UnityEngine;
 
 namespace CasualtiesUnknown.SaveManager
@@ -9,14 +9,10 @@ namespace CasualtiesUnknown.SaveManager
     /// 协调者：装配 HotkeyConfig / SaveStore / OverlayUI / SaveManagerWindow。
     /// 处理快捷键分发、定时备份调度。具体能力放在各专职文件里。
     /// </summary>
-    [BepInPlugin(PluginGuid, PluginName, PluginVersion)]
+    [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
     [BepInDependency("KrokoshaCasualtiesMP", BepInDependency.DependencyFlags.SoftDependency)]
     public sealed class Plugin : BaseUnityPlugin
     {
-        private const string PluginGuid = "com.casualtiesUnknown.saveManager";
-        private const string PluginName = "CuSaveManager";
-        internal const string PluginVersion = "1.2.1";
-
         private static ManualLogSource _log;
         private static Plugin _instance;
 
@@ -75,7 +71,7 @@ namespace CasualtiesUnknown.SaveManager
             // 用 Application.quitting 而非 OnApplicationQuit：在 Plugin 实例销毁前触发，可保证
             // Harmony unpatch 在游戏方法被最后一次调用前完成。
             Application.quitting += OnApplicationQuitting;
-            ModLog.Info($"{PluginName} ready · slots→{_store.SlotsRoot} · save.sv={SaveStore.GameSavePath}");
+            ModLog.Info($"{MyPluginInfo.PLUGIN_NAME} ready · slots→{_store.SlotsRoot} · save.sv={SaveStore.GameSavePath}");
             ModLog.Info(MultiplayerBridge.IsModPresent() ? I18n.T("mp.mod_detected") : I18n.T("mp.mod_not_detected"));
             ModLog.Info(QolBridge.IsQolPresent() ? I18n.T("qol.mod_detected") : I18n.T("qol.mod_not_detected"));
             MpWorldSeedInjector.TryPatch();
