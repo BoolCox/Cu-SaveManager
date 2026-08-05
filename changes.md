@@ -8,6 +8,14 @@
 
 修复超级银河皮带/材料包等自定义大容量容器读档后内容物丢失或散落一地的问题。
 
+兼容 Dedicated Server：回档时跳过 sidecar 主机坐标写回（专服没有本地玩家）。
+
+修复多人回档位置包时序：改为等待世界生成完成（`Util.IsWorldGenerated`）后一次写回，替代固定帧数重试，避免位置包早于 LateSpawn 生命周期而被覆盖。
+
+移除冗余的 PlaceBody 广播静音（KrokMP 新版已自带 `has_spawn_location` 守卫）。
+
+工程：目标框架 net472 → net48；新增 `KrokoshaCasualtiesMP.dll` 直接引用（位置写回协程由反射改为强引用）。
+
 ## 1.1.8 & 1.1.9
 
 修复「存档并退出」不在存档/回档列表里生成槽位的问题。

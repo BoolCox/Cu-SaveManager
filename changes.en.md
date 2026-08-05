@@ -8,6 +8,14 @@ Fixed anti-rad drugs (and other trap-named items) carried in the inventory alway
 
 Fixed items in oversized custom containers (e.g. Super Galaxy Belt / Material Pouch) being lost or scattered on the ground after loading a save.
 
+Dedicated Server compatible: host coordinates from the sidecar are skipped on rollback (a dedicated server has no local player).
+
+Fixed multiplayer rollback position-packet timing: now waits for world generation to finish (`Util.IsWorldGenerated`) before writing positions once, replacing fixed-frame retries that could be overwritten by a LateSpawn coroutine running later than the rollback lifecycle.
+
+Removed the redundant PlaceBody broadcast silencer (KrokMP now guards with `has_spawn_location` itself).
+
+Build: target framework net472 → net48; added a direct `KrokoshaCasualtiesMP.dll` reference (rollback coroutine switched from reflection to a strong reference).
+
 ## 1.1.8 & 1.1.9
 
 Fixed "Save & Exit" not creating a slot in the save / rollback list.

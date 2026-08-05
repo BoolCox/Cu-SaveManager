@@ -9,7 +9,8 @@ namespace CasualtiesUnknown.SaveManager
 {
     /// <summary>
     /// 多人回档位置写回：对齐单机 SelfSpawnPatcher（FinishWorldGeneration Postfix 最后写回）。
-    /// 不用 Krok OnWorldgenFinish 事件（会拖垮 Krok 协程）；改 Harmony Postfix + 抑制 PlaceBody 广播。
+    /// 不用 Krok OnWorldgenFinish 事件（会拖垮 Krok 协程）；改 Harmony Postfix，在世界生成完成后
+    /// 经 MpRollbackRunner 等待 Util.IsWorldGenerated 再写回玩家位置（PlaceBody 由 KrokMP 自身守卫）。
     /// </summary>
     internal static class MpPositionRestorer
     {

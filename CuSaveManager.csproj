@@ -4,7 +4,7 @@
     <TargetFramework>net48</TargetFramework>
     <AssemblyName>CuSaveManager</AssemblyName>
     <RootNamespace>CasualtiesUnknown.SaveManager</RootNamespace>
-    <LangVersion>14</LangVersion>
+    <LangVersion>latest</LangVersion>
     <Nullable>disable</Nullable>
     <Version>1.2.0</Version>
     <Description>Casualties Unknown — 多存档槽位管理与定时备份 mod</Description>
